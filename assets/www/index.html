@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" href="css/index.css" />
+		    <script charset="utf-8" src = "jquery-1.10.1.min.js"></script>
+		    <script charset="utf-8" src = "cordova-2.7.0.js"></script>
+
+<script>
+
+     function onDeviceReady(){
+     	var appname = "Fill Name of App in here";
+    	var txtFile = new XMLHttpRequest();
+txtFile.open("GET", "http://dl.dropboxusercontent.com/u/138513218/sample1.txt", true);
+txtFile.onreadystatechange = function() {
+  if (txtFile.readyState === 4) {  // Makes sure the document is ready to parse.
+    if (txtFile.status === 200) {  // Makes sure it's found the file.
+      allText = txtFile.responseText; 
+      info = allText.split("$");
+        $.get("version.txt", function(data) {
+    	 	if(parseFloat(data) < parseFloat(info[0]))
+    	 	{
+    	 		var answer = confirm ("There is an update available, would you like to update?")
+   if (answer)
+    	 		location.href="http://genterprise.web44.net/uploaded/" + info[1] + ".apk";
+   else
+    location.href ="http://www.google.com/"
+    	 	}
+    	});
+    }
+  }
+}
+txtFile.send(null);
+    	 
+
+     }
+
+
+
+
+</script>
+
+</head>
+
+
+<body>
+
+<button onclick="onDeviceReady()">Print version.txt</button>
+
+
+</body>
+</html>
+
